@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IndexDbModelStoreContainer" CdmEntityContainer="IndexDbEntities">
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IndexDbModel.Document">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="Document_Text" ColumnName="Document_Text" />
+          <ScalarProperty Name="Document_Id" ColumnName="Document_Id" />
+          <ScalarProperty Name="Ducument_Name" ColumnName="Ducument_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="IndexDbModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemsWithDocuments">
+      <EntityTypeMapping TypeName="IndexDbModel.ItemsWithDocument">
+        <MappingFragment StoreEntitySet="ItemsWithDocument">
+          <ScalarProperty Name="I_D_Id" ColumnName="I_D_Id" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Document_Id" ColumnName="Document_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

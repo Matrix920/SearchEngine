@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IndexDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="Document_Id" />
+    </Key>
+    <Property Name="Document_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ducument_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Document_Text" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="Item_Id" />
+    </Key>
+    <Property Name="Item_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItemsWithDocument">
+    <Key>
+      <PropertyRef Name="I_D_Id" />
+    </Key>
+    <Property Name="I_D_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item_Id" Type="int" Nullable="false" />
+    <Property Name="Document_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ItemsWithDocument_ToDocuments">
+    <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+    <End Role="ItemsWithDocument" Type="Self.ItemsWithDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="Document_Id" />
+      </Principal>
+      <Dependent Role="ItemsWithDocument">
+        <PropertyRef Name="Document_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemsWithDocument_ToItems">
+    <End Role="Items" Type="Self.Items" Multiplicity="1" />
+    <End Role="ItemsWithDocument" Type="Self.ItemsWithDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Items">
+        <PropertyRef Name="Item_Id" />
+      </Principal>
+      <Dependent Role="ItemsWithDocument">
+        <PropertyRef Name="Item_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IndexDbModelStoreContainer">
+    <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemsWithDocument" EntityType="Self.ItemsWithDocument" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ItemsWithDocument_ToDocuments" Association="Self.FK_ItemsWithDocument_ToDocuments">
+      <End Role="Documents" EntitySet="Documents" />
+      <End Role="ItemsWithDocument" EntitySet="ItemsWithDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemsWithDocument_ToItems" Association="Self.FK_ItemsWithDocument_ToItems">
+      <End Role="Items" EntitySet="Items" />
+      <End Role="ItemsWithDocument" EntitySet="ItemsWithDocument" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
